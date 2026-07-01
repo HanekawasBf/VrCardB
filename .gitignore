@@ -1,0 +1,32 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Archivos de exportación (builds pesados, no deben ir al repo)
+export/
+*.apk
+*.apk.idsig
+*.aab
+*.pck
+*.exe
+*.pdb
+*.dmg
+*.app/
+
+# Claves de firma / credenciales de exportación
+export_credentials.cfg
+android/keystores/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de editores de código
+.vscode/
+.idea/
+*.swp
+
+# Mono / C# (si se llegara a usar)
+.mono/
+data_*/
+mono_crash.*.json
