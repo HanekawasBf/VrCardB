@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cdgotoljaxsxt"]
+
+[ext_resource type="PackedScene" uid="uid://dxnx8vdvccdxo" path="res://map,player/Player.tscn" id="1_v4vgw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5vlql"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_v4vgw"]
+sky_material = SubResource("ProceduralSkyMaterial_5vlql")
+
+[sub_resource type="Environment" id="Environment_dwuen"]
+background_mode = 2
+sky = SubResource("Sky_v4vgw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_drscc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88ojr"]
+albedo_color = Color(0.0543454, 0.41878158, 1.92523e-07, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gh54y"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v4vgw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10rq6"]
+albedo_color = Color(0.244776, 0.244776, 0.244776, 1)
+
+[node name="MAPA" type="Node3D" unique_id=121252986]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1462341085]
+environment = SubResource("Environment_dwuen")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1232685087]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Map" type="Node3D" parent="." unique_id=1174821403]
+
+[node name="Floor" type="MeshInstance3D" parent="Map" unique_id=1828832496]
+transform = Transform3D(34.5678, 0, 0, 0, 1, 0, 0, 0, 34.5678, 0, 0, 0)
+mesh = SubResource("PlaneMesh_drscc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_88ojr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Floor" unique_id=411919394]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Floor/StaticBody3D" unique_id=1019355259]
+shape = SubResource("ConcavePolygonShape3D_gh54y")
+
+[node name="Cuadro" type="MeshInstance3D" parent="Map" unique_id=1529250695]
+transform = Transform3D(-0.60156566, 1.07082, -0.856194, 0, 4.6630077, 0.28674677, 0.8885087, 0.7249996, -0.57968694, 1.6691018, 2.7210848, -7.705619)
+mesh = SubResource("BoxMesh_v4vgw")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_10rq6")
+
+[node name="Player" parent="." unique_id=128768420 instance=ExtResource("1_v4vgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34278, 0)
