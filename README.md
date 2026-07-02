@@ -1,0 +1,4 @@
+- Nombre: Ortega Plaza Diego
+- Cuatrimestre: 6to
+- Carrera :Ing. Desarrollo de Software
+- Matricula: 2403230009
