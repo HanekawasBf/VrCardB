@@ -118,3 +118,45 @@ Necesito que:
 * Si al aplicar la distorsión el UV resultante queda fuera del rango 0.0-1.0, que pinte ese pixel de negro en vez de mostrar algo recortado o repetido.
 * Los pixeles fuera del radio de distorsión se muestran normales, sin modificar.
 * Que la fuerza y el radio de la distorsión sean uniforms ajustables desde el editor de Godot, con hint_range para poder moverlos con un slider.
+
+---
+
+## 4. Fase 2: Despliegue en Dispositivo Móvil
+- **Dispositivo de prueba:** Oppo (Android)
+
+### 4.1 Compilación y exportación a Android
+
+Para esta fase se utilizó como base el mismo proyecto de la Actividad 1. El entorno de exportación a Android (SDK, Platform-Tools, JDK) ya había sido configurado previamente mediante la instalación de Android Studio durante la Fase 1, por lo que no fue necesario reinstalar ni reconfigurar rutas adicionales en Editor Settings - Export - Android.
+
+No se generó un keystore de firma propio para esta entrega, ya que se consideró innecesario, el APK se firmó con el keystore de debug generado automáticamente por Godot.
+
+---
+
+### 4.2 Inicialización del plugin de Cardboard y sensores
+
+Se reutilizó la misma arquitectura de cámaras (`CardboardVRCamera`, `CardboardView`, `LensBarrelShader`) implementada en la Fase 1, sin requerir modificaciones en el código para su funcionamiento en dispositivo real.
+
+---
+
+### 4.3 Registro de errores
+
+- **Error / síntoma:** Al ejecutar la aplicación por primera vez en el dispositivo, la cámara no respondía al mover el teléfono (la vista permanecía estática).
+- **Causa:** El giroscopio del dispositivo no estaba habilitado en la configuración del proyecto (`Project Settings - Input Devices - Sensors - Enable Gyroscope`), ya que ese ajuste se había pasado por alto al preparar la exportación.
+- **Solución:** Se activó la opción `sensors/enable_gyroscope` en Project Settings y se volvió a exportar/instalar el APK. Tras esto, la cámara respondió correctamente a los movimientos del dispositivo.
+
+No se presentaron errores adicionales durante la compilación, generación del APK o instalación en el dispositivo.
+
+---
+
+### 4.4 Uso de Inteligencia Artificial
+
+Para esta fase no fue necesario consultar ninguna herramienta de IA, ya que no se presentaron errores técnicos relevantes más allá del ajuste del giroscopio.
+
+---
+
+### 4.5 Validación final en dispositivo real
+
+Se confirmó el funcionamiento correcto de la aplicación en el smartphone Oppo utilizado para las pruebas:
+
+- La vista estereoscópica se muestra correctamente dividida en dos mitades (una por ojo), cada una con la distorsión de lente aplicada mediante `LensBarrelShader`.
+- El giroscopio del dispositivo controla la rotación de la cámara de forma fluida al mover el teléfono en el espacio, sin desincronización entre ambos ojos.
